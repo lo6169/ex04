@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit Foster, Rhode Island</title>
+    <link rel="stylesheet" href="assets04/css/styles.css">
+</head>
+<body>
+    <div id="head">
+        Visit Foster, Rhode Island
+
+        <div id="nav">
+            <ul>
+                <li> Home </li>
+                <li> Activities </li>
+                <li> Food </li>
+                <li> Rest </li>
+                <li> People </li>
+                <li> Facebook </li>
+            </ul>
+        </div>
+    </div>
+
+<!--
+    <form name="myForm">
+        <div class="form">
+            Name: <br/> <input type="text" name="Name" id="nameget">
+        </div>
+         <br/> <br/>
+
+        How many people in your group: <br/> <input type="number" name="numgroup" id="numget"> <br/> <br/>
+
+        <div class="form">
+            Date arrived: <input type="date" name="visit" id="visit1">
+        </div>
+        <br/>
+        Date left: <input type="date" name="visit2" id="visit2"> <br/> <br/>
+
+
+
+        <fieldset id="favplace">
+            Favorite activity: <br/> <br/>
+            <input type="radio" name="favorite" id="OHD" checked>
+            <label for="OHD"> Old Home Days</label><br/>
+
+            <input type="radio" name="favorite" id="fish">
+            <label for="fish">Fishing </label><br/>
+
+            <input type="radio" name="favorite" id="eat">
+            <label for="eat">Eating at restaurants</label> <br/>
+
+
+            <input type="radio" name="favorite" id="hike">
+            <label for="hike">Hiking</label> <br/>
+
+
+            <input type="radio" name="favorite" id="jer">
+            <label for="jer">Visiting Jerimoth Hill</label><br/>
+
+            <input type="radio" name="favorite" id="scenery">
+            <label for="scenery">Looking at scenery </label><br/>
+
+            <input type="radio" name="favorite" id="other">
+            <label for="other"> Other/none </label><br/>
+        </fieldset>
+        <br/>
+
+        Please rate your overall stay: <br/>
+        0 <input type="range" min="0" max="10" value="5" name="rating"> 10 <br/>
+
+        <br/>
+        <input type="submit" value="Submit" onclick="validate()">
+    </form>
+ -->
+
+    <form action="process.php" method="POST" onsubmit="return validate();">
+        <div id="request">
+            Please Tell Us About Your Visit
+        </div> <!-- Div to ask tell us about your visit -->
+
+        <div id="entername" class="form">
+            Name:
+            <input type="text" id="visitor" name="visitor"
+                   placeholder="Enter Name" style="border-color: red; background-color: pink";>
+        </div> <!-- End of the get name section --> <br/> <br/>
+
+        <div id="dates">
+            <div id="enterdate" class="form">
+                Date arrived: <input type="date" name="visit" id="visitDate" style="background-color: pink;">
+            </div>
+            <br/>
+            Date left: <input type="date" name="visit2" id="visit2"> <br/> <br/>
+        </div> <!-- End of dates section -->
+
+        <div>
+            <fieldset id="favplace"  style="border-color: red;">
+                <legend>Favorite activity: </legend>
+                <input type="radio" name="favorite" id="OHD">
+                <label for="OHD"> Old Home Days</label><br/>
+
+                <input type="radio" name="favorite" id="fish">
+                <label for="fish">Fishing </label><br/>
+
+                <input type="radio" name="favorite" id="eat">
+                <label for="eat">Eating at restaurants</label> <br/>
+
+
+                <input type="radio" name="favorite" id="hike">
+                <label for="hike">Hiking</label> <br/>
+
+
+                <input type="radio" name="favorite" id="jer">
+                <label for="jer">Visiting Jerimoth Hill</label><br/>
+
+                <input type="radio" name="favorite" id="scenery">
+                <label for="scenery">Looking at scenery </label><br/>
+
+                <input type="radio" name="favorite" id="other">
+                <label for="other"> Other/none </label><br/>
+            </fieldset> <!-- End of favorite place -->
+        </div><!-- End of favorite place -->
+        <br/>
+
+        Please rate your overall stay: <br/>
+        0 <input type="range" min="0" max="10" value="5" name="rating"> 10 <br/>
+
+        <br/>
+        <input type="submit" value="Submit" onclick="validate()">
+    </form> <!-- End of form -->
+
+    <script>
+        function validate()
+        {
+            "use strict";
+            var isvalid = false;
+
+            var datevalid = validateDate();
+
+            var namevalid = validateName();
+
+            var radiovalid = validateRadio();
+        }
+
+        function validateDate()
+        {
+            "use strict";
+            var isvalid = true;
+            var visit = document.getElementById('visitDate');
+
+            if (visit == "")
+            {
+                document.getElementsByTagName('visitDate').style.backgroundColor = 'red';
+                return false;
+            }
+
+            var today  = new Date();
+            var dd = today.getDay();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+
+            if(dd < 10)
+            {
+                dd = '0' + dd;
+            }
+            if (mm < 10)
+            {
+                mm = '0' + mm;
+            }
+
+            var tday = "" + yyyy + "-" + mm + "-" + dd;
+
+            if (visit > tday)
+            {
+                console.log("Date not valid.");
+                document.getElementsByTagName('visitDate').style.backgroundColor = 'red';
+                isvalid = false;
+            }
+            else
+            {
+                document.getElementsByTagName('visitDate').style = null;
+            }
+
+            return isvalid;
+        }
+
+        function validateName()
+        {
+            var isvalid = true;
+            var name = document.getElementById('visitor');
+
+
+            if (name == "")
+            {
+                isvalid = false;
+            }
+
+            return isvalid;
+        }
+
+        function validateRadio()
+        {
+            var isChecked = false;
+
+            var len = document.getElementsByName('favplace');
+            var choices = new Array();
+
+            for (var i = 0; i < len; i++)
+            {
+                choices.push(document.getElementsByName('favorite')[i].checked);
+            }
+
+            if (choices.length > 0)
+            {
+                document.getElementsByTagName('favplace').style = null;
+                isChecked = true;
+            }
+            else
+            {
+                document.getElementsByTagName('favplace').style.borderColor = 'red';
+            }
+
+            return isChecked;
+        }
+    </script>
+
+</body>
+</html>

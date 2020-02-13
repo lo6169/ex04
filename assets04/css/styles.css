@@ -1,0 +1,47 @@
+body
+{
+    width: 80%;
+    margin-left: 10%;
+    background-color: #dff2d8;
+    font-family: Arial;
+}
+
+#head
+{
+    background-color: #7ebdc3;
+    color: #7a6263;
+    font-size: 2em;
+    padding: 2% 2% 0 2%;
+    margin: 1%;
+    text-align: center;
+}
+
+#nav
+{
+    text-align: center;
+}
+
+li
+{
+    display: inline;
+    padding: 10px;
+    font-size: 0.5em;
+}
+
+form
+{
+    width: 40%;
+    margin-left: 30%;
+    padding: 3%;
+    border-width: 2px;
+    border-color: #7ebdc3;
+    border-style: solid;
+    border-radius: 25px;
+}
+
+.form:after
+{
+    content: " * ";
+    color: red;
+    font-size: 1.25em;
+}
